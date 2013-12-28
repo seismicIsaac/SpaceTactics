@@ -22,11 +22,6 @@ public class BuildingController {
         }
     }
 
-    public void setPartiallyComplete(PlanetaryResource planetaryResource)
-    {
-
-    }
-
     public Building pickNextBuilding(PlanetaryResource planetaryResource)
     {
         for (Building building : planetaryResource.buildingQueue)
@@ -42,8 +37,8 @@ public class BuildingController {
 
     public void setBuildingComplete(PlanetaryResource planetaryResource)
     {
-         planetaryResource.currentlyBuilding.buildingPriority = 0;
-        // anything else i need to do here? like, add historical information? call to getBuilding CompletionBonus
+        planetaryResource.currentlyBuilding.buildingPriority = 0;
+        planetaryResource.currentlyBuilding.progress = planetaryResource.currentlyBuilding.cost;
     }
 
 

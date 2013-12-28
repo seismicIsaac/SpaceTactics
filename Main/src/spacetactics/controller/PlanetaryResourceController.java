@@ -51,23 +51,18 @@ public class PlanetaryResourceController {
         else if (budget + planetaryResource.currentlyBuilding.progress < planetaryResource.currentlyBuilding.cost)
         {
             planetaryResource.currentlyBuilding.progress += budget;
+
             if (planetaryResource.currentlyBuilding.partialBonus)
             {
-               buildingController.getPartialCompletionBonus(planetaryResource);
+               buildingController.applyCompletionBonus(planetaryResource);
             }
         }
-
     }
 
     public float getResourceProduction(PlanetaryResource planetaryResource)
     {
         System.out.println("Production: " + planetaryResource.baseUnitCount * planetaryResource.baseUnitProductionMultiplier * planetaryResource.innatePlanetBonus * planetaryResource.planetarySpending);
         return (planetaryResource.baseUnitCount * planetaryResource.baseUnitProductionMultiplier * planetaryResource.innatePlanetBonus * planetaryResource.planetarySpending);
-    }
-
-    public void payOffPlanetaryDebt()
-    {
-
     }
 
     public void genericStatMod(PlanetaryResource planetaryResource)
@@ -85,6 +80,13 @@ public class PlanetaryResourceController {
 
     public int calculateStatModification(PlanetaryResource planetaryResource)
     {
-        return (planetaryResource.currentlyBuilding.completionValue - planetaryResource.currentlyBuilding.partialCompletionPayedSoFar) * (planetaryResource.currentlyBuilding.progress / planetaryResource.currentlyBuilding.cost);
+        int statModification = (planetaryResource.currentlyBuilding.completionValue - planetaryResource.currentlyBuilding.partialCompletionPayedSoFar) * (planetaryResource.currentlyBuilding.progress / planetaryResource.currentlyBuilding.cost);
+
+        if (planetaryResource.currentlyBuilding.partialBonus)
+        {
+            planetaryResource.currentlyBuilding.partialCompletionPayedSoFar += statModification;
+        }
+
+        return statModification;
     }                               // this works for partial bonus too. should probably test it with weird edge cases and i'm not sure how java is going to handle the maths.
 }

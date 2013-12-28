@@ -14,6 +14,7 @@ public class PlanetaryResource {
 
     public float planetarySpending;
     public float innatePlanetBonus;
+    public int flatProduction;
     public int resourceSaved;
     public int baseUnitCost;
     public int baseUnitCount;
