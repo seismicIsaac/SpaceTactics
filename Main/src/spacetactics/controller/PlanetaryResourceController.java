@@ -3,6 +3,7 @@ package spacetactics.controller;
 import spacetactics.model.Planet;
 import spacetactics.model.PlanetaryResource;
 import spacetactics.model.PlayerStats;
+import spacetactics.model.Technology;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,13 @@ import java.util.ArrayList;
  */
 public class PlanetaryResourceController {
 
-    public BuildingController buildingController = new BuildingController();
+    public BuildingController buildingController;
+
+    public PlanetaryResourceController()
+    {
+        BuildingController buildingController = new BuildingController(this);
+        this.buildingController = buildingController;
+    }
 
     public void calculateProductionOnPlanets(PlayerStats playerStats)
     {
@@ -25,7 +32,10 @@ public class PlanetaryResourceController {
             {
                 float budget = getResourceProduction(planetaryResource);
 
-                processBuildingRequest(budget, planetaryResource);
+                if (planetaryResource.currentlyBuilding.buildingName != "<Nothing>")
+                {
+                    processBuildingRequest(budget, planetaryResource);
+                }
             }
         }
     }
@@ -35,8 +45,9 @@ public class PlanetaryResourceController {
         if (budget + planetaryResource.currentlyBuilding.progress >= planetaryResource.currentlyBuilding.cost)
         {
             //get bonus for building completion
-            buildingController.applyCompletionBonus(planetaryResource);
+
             buildingController.setBuildingComplete(planetaryResource);
+            buildingController.applyCompletionBonus(planetaryResource);
 
             //calculate remainder
             budget = budget + planetaryResource.currentlyBuilding.progress - planetaryResource.currentlyBuilding.cost;
@@ -70,6 +81,7 @@ public class PlanetaryResourceController {
         if (planetaryResource.currentlyBuilding.statModified == "baseUnitCount")
         {
             planetaryResource.baseUnitCount += calculateStatModification(planetaryResource);
+            System.out.println("attempted to modify baseUnitCount");
         }
 
         if (planetaryResource.currentlyBuilding.statModified == "baseUnitMax")
@@ -80,7 +92,8 @@ public class PlanetaryResourceController {
 
     public int calculateStatModification(PlanetaryResource planetaryResource)
     {
-        int statModification = (planetaryResource.currentlyBuilding.completionValue - planetaryResource.currentlyBuilding.partialCompletionPayedSoFar) * (planetaryResource.currentlyBuilding.progress / planetaryResource.currentlyBuilding.cost);
+        float percentComplete = (float)(planetaryResource.currentlyBuilding.progress) / (float)(planetaryResource.currentlyBuilding.cost);
+        int statModification = (int)((planetaryResource.currentlyBuilding.completionValue * percentComplete)) - planetaryResource.currentlyBuilding.partialCompletionPayedSoFar;
 
         if (planetaryResource.currentlyBuilding.partialBonus)
         {
@@ -89,4 +102,9 @@ public class PlanetaryResourceController {
 
         return statModification;
     }                               // this works for partial bonus too. should probably test it with weird edge cases and i'm not sure how java is going to handle the maths.
+
+    public void updateBuildQueue(PlanetaryResource planetaryResource, ArrayList<Technology> playerTechnologies)
+    {
+
+    }
 }

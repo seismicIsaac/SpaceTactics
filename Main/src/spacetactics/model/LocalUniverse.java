@@ -23,7 +23,7 @@ public class LocalUniverse {
         //TODO: add some awesome algorithm for spawning 'dem planets
         Random random = new Random();
 
-        while (planets.size() < 20)
+        while (planets.size() < 5)
         {
             int x = random.nextInt(width) + 1;
             int y = random.nextInt(height) + 1;
@@ -39,13 +39,21 @@ public class LocalUniverse {
                 ArrayList<PlanetaryResource> defaultResources = new ArrayList<PlanetaryResource>();
                 PlanetaryResource prod = new PlanetaryResource();
                 prod.planetarySpending = 1;
-                prod.resourceCost = 10;
-                prod.resourceCount = 1;
-                prod.resourceProductionMultiplier = 2;
+                prod.baseUnitCost = 10;
+                prod.baseUnitCount = 1;
+                prod.baseUnitProductionMultiplier = 2;
                 prod.currentDebt = 0;
                 prod.innatePlanetBonus = 1;
-                prod.resourceMax = 100;
+                prod.baseUnitMax = 100;
                 prod.resourceSaved = 0;
+
+                Building building = new Building("Factories", "Production", 1000, 10, true, "baseUnitCount", "GenericStatMod", 100);
+                prod.currentlyBuilding = building;
+                Building building2 = new Building("Tech Lab", "Research", 250, 50, false, "baseUnitCount", "GenericStatMod", 20);
+                prod.buildingQueue.add(building);
+                prod.buildingQueue.add(building2);
+
+
                 defaultResources.add(prod);
 
                 Planet randomPlanet = new Planet(x, y, imgLocation, planetInteractSquareDimension, planetInteractSquareDimension, planetName, maxPop, defaultResources);

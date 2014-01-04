@@ -73,6 +73,8 @@ public class PlanetObserverScreen implements Screen {
 
         String planetStats = new String();
         String planetStats2 = new String();
+        String currentlyBuilding = new String();
+        String buildingProgress = new String();
 
         for (PlanetView planetView : planetViews)
         {
@@ -80,14 +82,18 @@ public class PlanetObserverScreen implements Screen {
             if (planetView.isSelected)
             {
                 planetStats = "Max Population: " + planetView.getPlanet().maxPopulation + "  X:" + planetView.getPlanet().xPosition + "  Y:" + planetView.getPlanet().yPosition;
-                planetStats2 = "Factories: " + planetView.getPlanet().planetaryResources.get(0).resourceCount;
+                planetStats2 = "Factories: " + planetView.getPlanet().planetaryResources.get(0).baseUnitCount;
+                currentlyBuilding = "Currently Building: " + planetView.getPlanet().planetaryResources.get(0).currentlyBuilding.buildingName;
+                buildingProgress = "Progress: " + planetView.getPlanet().planetaryResources.get(0).currentlyBuilding.progress;
             }
         }
 
         spaceTactics.batch.draw(this.textureAtlas.get("hud1.png"),  0,  0);
         spaceTactics.batch.draw(this.textureAtlas.get("next turn button.png"), 1075, 50);
-        spaceTactics.font.draw(spaceTactics.batch, planetStats, 1000, 500);
-        spaceTactics.font.draw(spaceTactics.batch, planetStats2, 1000, 475);
+        spaceTactics.font.draw(spaceTactics.batch, planetStats, 1000, 600);
+        spaceTactics.font.draw(spaceTactics.batch, planetStats2, 1000, 575);
+        spaceTactics.font.draw(spaceTactics.batch, currentlyBuilding, 1000, 550);
+        spaceTactics.font.draw(spaceTactics.batch, buildingProgress, 1000, 525);
 
         spaceTactics.batch.end();
 

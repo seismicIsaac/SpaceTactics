@@ -17,4 +17,9 @@ public class PlayerStatsController {
     {
         planetaryResourceController.calculateProductionOnPlanets(playerStats);
     }
+
+    public PlayerStatsController ()
+    {
+        this.planetaryResourceController = new PlanetaryResourceController();
+    }
 }

@@ -12,6 +12,7 @@ import java.util.HashMap;
  */
 public class PlanetaryResource {
 
+    public String resourceName;
     public float planetarySpending;
     public float innatePlanetBonus;
     public int flatProduction;

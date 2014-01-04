@@ -12,24 +12,9 @@ import java.util.HashMap;
  */
 public class PlayerStats {
 
-    private int terraformingBonus;
-    private int productionBonus;
-    private int researchBonus;
-
-    public int factoryCost;
-    public int prodPerFactory;
-
-    public int colonistCost;
-    public int prodPerColonist;
+    public int prodPerFactory = 1;
 
     public ArrayList<Planet> settledPlanets;
-
-    public void annualStatUpdate()
-    {
-        for (Planet planet : settledPlanets)
-        {
-            planet.update(this);
-        }
-    }
+    public ArrayList<Technology> researchedTechnologies;
 
 }

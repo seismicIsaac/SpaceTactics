@@ -12,6 +12,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import spacetactics.controller.DataLoader;
+import spacetactics.controller.GameSimulation;
+import spacetactics.model.GameData;
 import spacetactics.view.PlanetView;
 import spacetactics.controller.InputHandler;
 import spacetactics.model.LocalUniverse;
@@ -26,14 +29,18 @@ import spacetactics.view.PlanetObserverScreen;
  */
 public class SpaceTactics extends Game {
 
+    public GameData gameData = new GameData();
+    public GameSimulation gameSimulation = new GameSimulation();
+    public DataLoader dataLoader = new DataLoader();
+
     public SpriteBatch batch;
     private InputHandler inputHandler;
-    private LocalUniverse localUniverse;
     private PlanetObserverScreen planetObserverScreen;
     public final int APPLICATION_WIDTH;
     public final int APPLICATION_HEIGHT;
     public BitmapFont font;
     private HashMap<String, Texture> textureAtlas = new HashMap<String, Texture>();
+
 
     public SpaceTactics(int width, int height)
     {
@@ -43,11 +50,14 @@ public class SpaceTactics extends Game {
 
     @Override
     public void create() {
+        // Set Screen to Main menu -->
+        // From Main Menu we decide what else to do
+
+        gameSimulation.initializeNewGame(gameData, this);
 
         batch = new SpriteBatch();
         font = new BitmapFont();
-        localUniverse = new LocalUniverse(APPLICATION_WIDTH, APPLICATION_HEIGHT);
-        planetObserverScreen = new PlanetObserverScreen(localUniverse, this);
+        planetObserverScreen = new PlanetObserverScreen(gameData.localUniverse, this);
         inputHandler = new InputHandler(planetObserverScreen.planetViews, APPLICATION_WIDTH, APPLICATION_HEIGHT);
         Gdx.input.setInputProcessor(inputHandler);
         setScreen(planetObserverScreen);
