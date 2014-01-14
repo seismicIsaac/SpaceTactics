@@ -44,18 +44,10 @@ public class PlanetaryResourceController {
     {
         if (budget + planetaryResource.currentlyBuilding.progress >= planetaryResource.currentlyBuilding.cost)
         {
-            //get bonus for building completion
-
             buildingController.setBuildingComplete(planetaryResource);
             buildingController.applyCompletionBonus(planetaryResource);
-
-            //calculate remainder
             budget = budget + planetaryResource.currentlyBuilding.progress - planetaryResource.currentlyBuilding.cost;
-
-            //pick next building in building queue
             planetaryResource.currentlyBuilding = buildingController.pickNextBuilding(planetaryResource);
-
-            //do i have enough to complete that building too?
             processBuildingRequest(budget, planetaryResource);
 
         }
@@ -81,7 +73,6 @@ public class PlanetaryResourceController {
         if (planetaryResource.currentlyBuilding.statModified == "baseUnitCount")
         {
             planetaryResource.baseUnitCount += calculateStatModification(planetaryResource);
-            System.out.println("attempted to modify baseUnitCount");
         }
 
         if (planetaryResource.currentlyBuilding.statModified == "baseUnitMax")
@@ -101,7 +92,7 @@ public class PlanetaryResourceController {
         }
 
         return statModification;
-    }                               // this works for partial bonus too. should probably test it with weird edge cases and i'm not sure how java is going to handle the maths.
+    }
 
     public void updateBuildQueue(PlanetaryResource planetaryResource, ArrayList<Technology> playerTechnologies)
     {

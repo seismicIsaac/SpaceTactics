@@ -3,22 +3,15 @@ package spacetactics;
 import com.badlogic.gdx.Game;
 import java.util.HashMap;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import spacetactics.controller.DataLoader;
 import spacetactics.controller.GameSimulation;
 import spacetactics.model.GameData;
-import spacetactics.view.PlanetView;
 import spacetactics.controller.InputHandler;
-import spacetactics.model.LocalUniverse;
-import spacetactics.view.PlanetObserverScreen;
+import spacetactics.view.planetobserverscreen.PlanetObserverScreen;
 
 /**
  * Created with IntelliJ IDEA.
@@ -58,7 +51,7 @@ public class SpaceTactics extends Game {
         batch = new SpriteBatch();
         font = new BitmapFont();
         planetObserverScreen = new PlanetObserverScreen(gameData.localUniverse, this);
-        inputHandler = new InputHandler(planetObserverScreen.planetViews, APPLICATION_WIDTH, APPLICATION_HEIGHT);
+        inputHandler = new InputHandler(planetObserverScreen.clickables, APPLICATION_WIDTH, APPLICATION_HEIGHT);
         Gdx.input.setInputProcessor(inputHandler);
         setScreen(planetObserverScreen);
         inputHandler.currentScreen = planetObserverScreen;

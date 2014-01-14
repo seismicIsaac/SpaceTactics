@@ -11,6 +11,7 @@ public interface Clickable {
     public void inView();
     public void onClick();
     public boolean hitTest(int x, int y);
+    public void removeFocus();
 }
 
 

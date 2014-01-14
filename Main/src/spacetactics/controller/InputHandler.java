@@ -1,10 +1,9 @@
 package spacetactics.controller;
 
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import spacetactics.view.Clickable;
-import spacetactics.view.PlanetView;
-import spacetactics.view.PlanetObserverScreen;
+import spacetactics.view.planetobserverscreen.PlanetView;
+import spacetactics.view.planetobserverscreen.PlanetObserverScreen;
 
 import java.util.ArrayList;
 
@@ -17,15 +16,14 @@ import java.util.ArrayList;
  */
 public class InputHandler implements InputProcessor
 {
-    private ArrayList<PlanetView> planetViews = new ArrayList<PlanetView>();
+    private ArrayList<Clickable> clickables = new ArrayList<Clickable>();
     private int applicationWidth;
     private int applicationHeight;
     public PlanetObserverScreen currentScreen;
 
-
-    public InputHandler(ArrayList<PlanetView> arrayList, int width, int height)
+    public InputHandler(ArrayList<Clickable> arrayList, int width, int height)
     {
-        this.planetViews = arrayList;
+        this.clickables = arrayList;
         this.applicationHeight = height;
         this.applicationWidth = width;
     }
@@ -49,32 +47,24 @@ public class InputHandler implements InputProcessor
     }
 
     @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        removeFocus();
+    public boolean touchDown(int screenX, int screenY, int pointer, int button)
+    {
         screenY = (screenY - applicationHeight) * -1;
-        System.out.println("Mouse Location x: " + screenX + " Mouse location y: " + screenY + " Pointer? " + pointer + " button: " + button);
-        for (Clickable clickable : planetViews)
+        System.out.println("Mouse Location x: " + screenX + " Mouse location y: " + screenY);
+
+        for (Clickable clickable : clickables)
         {
             if (clickable.hitTest(screenX, screenY))
             {
                 clickable.onClick();
             }
-        }
-
-        if (screenX >= 1075 && screenX <= 1260 && screenY >= 50 && screenY <= 110)
-        {
-            currentScreen.playerStatsController.annualUpdatePlayerStats(currentScreen.playerStats);
+            else
+            {
+                clickable.removeFocus();
+            }
         }
 
         return false;
-    }
-
-    public void removeFocus()
-    {
-        for (PlanetView planetView: planetViews)
-        {
-            planetView.isSelected = false;
-        }
     }
 
     @Override

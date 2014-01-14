@@ -1,4 +1,4 @@
-package spacetactics.view;
+package spacetactics.view.planetobserverscreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -10,6 +10,8 @@ import spacetactics.controller.PlayerStatsController;
 import spacetactics.model.Planet;
 import spacetactics.model.LocalUniverse;
 import spacetactics.model.PlayerStats;
+import spacetactics.view.Button;
+import spacetactics.view.Clickable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,23 +25,26 @@ import java.util.HashMap;
  */
 public class PlanetObserverScreen implements Screen {
 
-    private SpaceTactics spaceTactics;
+    public SpaceTactics spaceTactics;
 
     public ArrayList<PlanetView> planetViews = new ArrayList<PlanetView>();
+    public ArrayList<Clickable> clickables = new ArrayList<Clickable>();
     public HashMap<String, Texture> textureAtlas = new HashMap<String, Texture>();
-    public Clickable[] screenButtons;
     public PlayerStatsController playerStatsController = new PlayerStatsController();
     public PlayerStats playerStats = new PlayerStats();
     public PlanetaryResourceController planetaryResourceController = new PlanetaryResourceController();
+    public NextTurnButton nextTurnButton = new NextTurnButton(1085, 25, 185, 61, "next turn button.png");
+    public SettleColonyButton settleColonyButton = new SettleColonyButton(1085, 300, 185, 61, "settleColonyButton.png");
+    public PlanetView selectedPlanetView;
 
     public void getPlanetViewTextures()
     {
         for (PlanetView planetView : planetViews)
         {
-            if (!textureAtlas.containsKey(planetView.getImageLocation()));
+            if (!textureAtlas.containsKey(planetView.imageLocation));
             {
-                Texture texture = new Texture(Gdx.files.internal(planetView.getImageLocation()));
-                textureAtlas.put(planetView.getImageLocation(), texture);
+                Texture texture = new Texture(Gdx.files.internal(planetView.imageLocation));
+                textureAtlas.put(planetView.imageLocation, texture);
             }
         }
         Texture texture = new Texture(Gdx.files.internal("hud1.png"));
@@ -47,6 +52,22 @@ public class PlanetObserverScreen implements Screen {
 
         Texture texture1 = new Texture(Gdx.files.internal("next turn button.png"));
         textureAtlas.put("next turn button.png", texture1);
+
+        Texture texture2 = new Texture(Gdx.files.internal("settleColonyButton.png"));
+        textureAtlas.put("settleColonyButton.png", texture2);
+    }
+
+    public void displaySelectedPlanetStats()
+    {
+        String planetStats = new String("Max Population: " + selectedPlanetView.planet.maxPopulation + "  X:" + selectedPlanetView.planet.xPosition + "  Y:" + selectedPlanetView.planet.yPosition);
+        String planetStats2 = new String("Factories: " + selectedPlanetView.planet.planetaryResources.get(0).baseUnitCount);
+        String currentlyBuilding = new String("Currently Building: " + selectedPlanetView.planet.planetaryResources.get(0).currentlyBuilding.buildingName);
+        String buildingProgress = new String("Progress: " + selectedPlanetView.planet.planetaryResources.get(0).currentlyBuilding.progress);
+
+        spaceTactics.font.draw(spaceTactics.batch, planetStats, 1000, 600);
+        spaceTactics.font.draw(spaceTactics.batch, planetStats2, 1000, 575);
+        spaceTactics.font.draw(spaceTactics.batch, currentlyBuilding, 1000, 550);
+        spaceTactics.font.draw(spaceTactics.batch, buildingProgress, 1000, 525);
     }
 
     public PlanetObserverScreen(LocalUniverse localUniverse, SpaceTactics spaceTactics)
@@ -55,9 +76,17 @@ public class PlanetObserverScreen implements Screen {
 
         for (Planet planet : localUniverse.getPlanets())
         {
-            planetViews.add(new PlanetView(planet));
+            PlanetView planetView = new PlanetView(planet, this);
+            planetViews.add(planetView);
+            clickables.add(planetView);
+
         }
+
         getPlanetViewTextures();
+
+        clickables.add(nextTurnButton);
+        clickables.add(settleColonyButton);
+
         playerStats.settledPlanets = localUniverse.getPlanets();
         playerStatsController.planetaryResourceController = planetaryResourceController;
 
@@ -71,29 +100,19 @@ public class PlanetObserverScreen implements Screen {
 
         spaceTactics.batch.begin();
 
-        String planetStats = new String();
-        String planetStats2 = new String();
-        String currentlyBuilding = new String();
-        String buildingProgress = new String();
-
         for (PlanetView planetView : planetViews)
         {
-            spaceTactics.batch.draw(this.textureAtlas.get(planetView.getImageLocation()), planetView.getPlanet().xPosition, planetView.getPlanet().yPosition);
-            if (planetView.isSelected)
-            {
-                planetStats = "Max Population: " + planetView.getPlanet().maxPopulation + "  X:" + planetView.getPlanet().xPosition + "  Y:" + planetView.getPlanet().yPosition;
-                planetStats2 = "Factories: " + planetView.getPlanet().planetaryResources.get(0).baseUnitCount;
-                currentlyBuilding = "Currently Building: " + planetView.getPlanet().planetaryResources.get(0).currentlyBuilding.buildingName;
-                buildingProgress = "Progress: " + planetView.getPlanet().planetaryResources.get(0).currentlyBuilding.progress;
-            }
+            spaceTactics.batch.draw(this.textureAtlas.get(planetView.imageLocation), planetView.planet.xPosition, planetView.planet.yPosition);
         }
 
         spaceTactics.batch.draw(this.textureAtlas.get("hud1.png"),  0,  0);
-        spaceTactics.batch.draw(this.textureAtlas.get("next turn button.png"), 1075, 50);
-        spaceTactics.font.draw(spaceTactics.batch, planetStats, 1000, 600);
-        spaceTactics.font.draw(spaceTactics.batch, planetStats2, 1000, 575);
-        spaceTactics.font.draw(spaceTactics.batch, currentlyBuilding, 1000, 550);
-        spaceTactics.font.draw(spaceTactics.batch, buildingProgress, 1000, 525);
+        spaceTactics.batch.draw(this.textureAtlas.get("next turn button.png"), nextTurnButton.xPosition, nextTurnButton.yPosition);
+        spaceTactics.batch.draw(this.textureAtlas.get("settleColonyButton.png"), settleColonyButton.xPosition, settleColonyButton.yPosition);
+
+        if (selectedPlanetView != null)
+        {
+            displaySelectedPlanetStats();
+        }
 
         spaceTactics.batch.end();
 
@@ -129,4 +148,7 @@ public class PlanetObserverScreen implements Screen {
     public void dispose() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
+
 }
+

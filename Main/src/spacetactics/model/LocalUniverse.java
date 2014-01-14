@@ -33,8 +33,8 @@ public class LocalUniverse {
             {
                 int starType = random.nextInt(5) + 1; //normally this would determine the image location <_<
                 String planetName = new String(setStarName(starType));
-                String imgLocation = "planet.png";
-                int planetInteractSquareDimension = 50;
+                String imgLocation = planetName;
+                int planetInteractSquareDimension = 39;
 
                 ArrayList<PlanetaryResource> defaultResources = new ArrayList<PlanetaryResource>();
                 PlanetaryResource prod = new PlanetaryResource();
@@ -47,9 +47,9 @@ public class LocalUniverse {
                 prod.baseUnitMax = 100;
                 prod.resourceSaved = 0;
 
-                Building building = new Building("Factories", "Production", 1000, 10, true, "baseUnitCount", "GenericStatMod", 100);
+                Building building = new Building("Factories", PlanetaryResourceType.INDUSTRY, 1000, 10, true, "baseUnitCount", "GenericStatMod", 100);
                 prod.currentlyBuilding = building;
-                Building building2 = new Building("Tech Lab", "Research", 250, 50, false, "baseUnitCount", "GenericStatMod", 20);
+                Building building2 = new Building("Tech Lab", PlanetaryResourceType.SCIENCE, 250, 50, false, "baseUnitCount", "GenericStatMod", 20);
                 prod.buildingQueue.add(building);
                 prod.buildingQueue.add(building2);
 

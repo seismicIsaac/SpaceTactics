@@ -10,7 +10,7 @@ package spacetactics.model;
 public class Building {
 
     public String buildingName;
-    public String associatedResource;
+    public PlanetaryResourceType associatedResource;
     public int cost;
     public int progress;
     public int buildingPriority;  // 0 = completed, 1 = default/nothing to build
@@ -26,7 +26,7 @@ public class Building {
 
     }
 
-    public Building(String buildingName, String associatedResource, int cost, int buildingPriority, boolean partialBonus, String statModified, String completionRewardType, int completionValue)
+    public Building(String buildingName, PlanetaryResourceType associatedResource, int cost, int buildingPriority, boolean partialBonus, String statModified, String completionRewardType, int completionValue)
     {
         this.buildingName = buildingName;
         this.associatedResource = associatedResource;

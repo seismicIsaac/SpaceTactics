@@ -15,8 +15,8 @@ public class Planet {
     public int xPosition;
     public int yPosition;
     public String imageLocation; //should this go into planetView? yes.
-    private int interactHeight; //should this go into planetView? yes.
-    private int interactWidth; //should this go into planetView? yes.
+    public int interactHeight; //should this go into planetView? yes.
+    public int interactWidth; //should this go into planetView? yes.
     public String starName;
 
     private float growthBonus;
