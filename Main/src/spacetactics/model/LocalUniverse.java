@@ -42,10 +42,8 @@ public class LocalUniverse {
                 prod.baseUnitCost = 10;
                 prod.baseUnitCount = 1;
                 prod.baseUnitProductionMultiplier = 2;
-                prod.currentDebt = 0;
                 prod.innatePlanetBonus = 1;
                 prod.baseUnitMax = 100;
-                prod.resourceSaved = 0;
 
                 Building building = new Building("Factories", PlanetaryResourceType.INDUSTRY, 1000, 10, true, "baseUnitCount", "GenericStatMod", 100);
                 prod.currentlyBuilding = building;
@@ -54,9 +52,9 @@ public class LocalUniverse {
                 prod.buildingQueue.add(building2);
 
 
-                defaultResources.add(prod);
 
-                Planet randomPlanet = new Planet(x, y, imgLocation, planetInteractSquareDimension, planetInteractSquareDimension, planetName, maxPop, defaultResources);
+
+                Planet randomPlanet = new Planet(x, y, imgLocation, planetInteractSquareDimension, planetInteractSquareDimension, planetName, maxPop);
                 planets.add(randomPlanet);
 
             }

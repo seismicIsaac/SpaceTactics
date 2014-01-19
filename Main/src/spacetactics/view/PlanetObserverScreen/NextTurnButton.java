@@ -12,9 +12,12 @@ import spacetactics.view.Clickable;
  */
 public class NextTurnButton extends Button implements Clickable {
 
+    private PlanetObserverScreen planetObserverScreen;
+
     @Override
     public void onClick() {
         System.out.println("Next turn...");
+
     }
 
     @Override
@@ -27,8 +30,9 @@ public class NextTurnButton extends Button implements Clickable {
         super.inView();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
-    public NextTurnButton(int x, int y, int width, int height, String imageLocation)
+    public NextTurnButton(int x, int y, int width, int height, String imageLocation, PlanetObserverScreen planetObserverScreen)
     {
         super(x, y, width, height, imageLocation);
+        this.planetObserverScreen = planetObserverScreen;
     }
 }

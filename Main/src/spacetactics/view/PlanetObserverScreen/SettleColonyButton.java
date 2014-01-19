@@ -12,9 +12,20 @@ import spacetactics.view.Clickable;
  */
 public class SettleColonyButton extends Button implements Clickable {
 
+    private PlanetObserverScreen planetObserverScreen;
+
     @Override
     public void onClick() {
-       System.out.println("Settle Colony");
+        System.out.println("Settle Colony");
+        if (planetObserverScreen.selectedPlanetView.planet.settledBy != "Player1")
+        {
+            planetObserverScreen.spaceTactics.gameSimulation.settleColony(planetObserverScreen.selectedPlanetView.planet, planetObserverScreen.spaceTactics.gameData.players.get("Player1"));
+        }
+        else
+        {
+            System.out.println("Already Settled by Player 1");
+        }
+
     }
 
     @Override
@@ -27,8 +38,9 @@ public class SettleColonyButton extends Button implements Clickable {
         super.inView();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
-    public SettleColonyButton(int x, int y, int width, int height, String imageLocation)
+    public SettleColonyButton(int x, int y, int width, int height, String imageLocation, PlanetObserverScreen planetObserverScreen)
     {
         super(x, y, width, height, imageLocation);
+        this.planetObserverScreen = planetObserverScreen;
     }
 }

@@ -1,11 +1,10 @@
 package spacetactics.controller;
 
-import spacetactics.model.Planet;
-import spacetactics.model.PlanetaryResource;
-import spacetactics.model.PlayerStats;
-import spacetactics.model.Technology;
+import com.badlogic.gdx.utils.Json;
+import spacetactics.model.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,24 +16,33 @@ import java.util.ArrayList;
 public class PlanetaryResourceController {
 
     public BuildingController buildingController;
+    private Json json = new Json();
 
-    public PlanetaryResourceController()
+    public void initalizeNewColonyResources(Planet planet, PlayerStats playerStats)
     {
-        BuildingController buildingController = new BuildingController(this);
-        this.buildingController = buildingController;
+        HashMap<PlanetaryResourceType, PlanetaryResource> initialPlanetaryResources = new HashMap<PlanetaryResourceType, PlanetaryResource>();
+
+        PlanetaryResource industry = new PlanetaryResource(planet, playerStats, PlanetaryResourceType.INDUSTRY);
+        initialPlanetaryResources.put(PlanetaryResourceType.INDUSTRY, industry);
+        PlanetaryResource science = new PlanetaryResource(planet, playerStats, PlanetaryResourceType.SCIENCE);
+        initialPlanetaryResources.put(PlanetaryResourceType.SCIENCE, science);
+        PlanetaryResource ecology = new PlanetaryResource(planet, playerStats, PlanetaryResourceType.ECOLOGY);
+        initialPlanetaryResources.put(PlanetaryResourceType.ECOLOGY, ecology);
+
+        planet.planetaryResources = initialPlanetaryResources;
     }
 
     public void calculateProductionOnPlanets(PlayerStats playerStats)
     {
         for (Planet planet : playerStats.settledPlanets)
         {
-            for (PlanetaryResource planetaryResource : planet.planetaryResources)
+            for (PlanetaryResourceType planetaryResourceType : PlanetaryResourceType.values())
             {
-                float budget = getResourceProduction(planetaryResource);
+                float budget = getResourceProduction(planet.planetaryResources.get(planetaryResourceType));
 
-                if (planetaryResource.currentlyBuilding.buildingName != "<Nothing>")
+                if (planet.planetaryResources.get(planetaryResourceType).currentlyBuilding.buildingName != "<Nothing>");
                 {
-                    processBuildingRequest(budget, planetaryResource);
+                    processBuildingRequest(budget, planet.planetaryResources.get(planetaryResourceType));
                 }
             }
         }
@@ -97,5 +105,11 @@ public class PlanetaryResourceController {
     public void updateBuildQueue(PlanetaryResource planetaryResource, ArrayList<Technology> playerTechnologies)
     {
 
+    }
+
+    public PlanetaryResourceController()
+    {
+        BuildingController buildingController = new BuildingController(this);
+        this.buildingController = buildingController;
     }
 }

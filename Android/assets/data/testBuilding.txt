@@ -1,4 +1,0 @@
-[
-{class:spacetactics.model.Building,buildingName:Factories,cost:0,progress:0,buildingPriority:10,partialBonus:true,statModified:baseUnitCount,completionRewardType:GenericStatMod,completionValue:100,partialCompletionPayedSoFar:0,associatedResource:INDUSTRY},
-{class:spacetactics.model.Building,partialCompletionPayedSoFar:100}
-] 

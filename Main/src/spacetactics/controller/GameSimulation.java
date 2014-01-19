@@ -1,9 +1,9 @@
 package spacetactics.controller;
 
 import spacetactics.SpaceTactics;
-import spacetactics.model.Building;
-import spacetactics.model.GameData;
-import spacetactics.model.LocalUniverse;
+import spacetactics.model.*;
+
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,6 +14,8 @@ import spacetactics.model.LocalUniverse;
  */
 public class GameSimulation {
 
+    private PlanetaryResourceController planetaryResourceController;
+
     public void initializeNewGame(GameData gameData, SpaceTactics spaceTactics)
     {
         spaceTactics.dataLoader.loadData(gameData.allBuildings, "data/testBuilding.txt");
@@ -23,5 +25,11 @@ public class GameSimulation {
     public void nextTurn()
     {
 
+    }
+
+    public void settleColony(Planet planet, PlayerStats playerStats)
+    {
+        planetaryResourceController.initalizeNewColonyResources(planet, playerStats);
+        planet.settledBy = playerStats.playerSlot;
     }
 }

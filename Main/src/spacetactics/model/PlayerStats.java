@@ -14,7 +14,15 @@ public class PlayerStats {
 
     public int prodPerFactory = 1;
 
+    public String playerName;
+    public String playerSlot;
+    public HashMap<PlanetaryResourceType, PlanetaryResource> planetaryResourceStats = new HashMap<PlanetaryResourceType, PlanetaryResource>();
     public ArrayList<Planet> settledPlanets;
     public ArrayList<Technology> researchedTechnologies;
+
+    public PlayerStats()
+    {
+
+    }
 
 }

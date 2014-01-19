@@ -9,24 +9,26 @@ package spacetactics.model;
  */
 public class Building {
 
-    public String buildingName;
-    public PlanetaryResourceType associatedResource;
-    public int cost;
-    public int progress;
-    public int buildingPriority;  // 0 = completed, 1 = default/nothing to build
-    public boolean partialBonus;
-    public String statModified;
-    public String completionRewardType;
-    public int completionValue;
-    public int partialCompletionPayedSoFar;
+    public PlanetaryResourceType associatedResource;        //from data file
+    public String buildingName;                             //from data file
+    public int buildingPriority;  // 0 = completed, 1 = default/nothing to build - //from data file
+    public String completionRewardType;                     //from dat
+    public int completionValue;                             //from dat
+    public int cost;                                        //from data file
+    public boolean partialBonus;                            //from data file
+    public int partialCompletionPayedSoFar;                  //preset to 0 on init
+    public int progress;                                    //preset to 0 on initialization
+    public StatModified statModified;                             //from dat
 
-
+    public enum StatModified{
+       BASE_UNIT_COUNT, BASE_UNIT_PRODUCTION_MULTIPLIER, MAX_POPULATION, FLAT_PRODUCTION
+    }
     public Building()
     {
 
     }
 
-    public Building(String buildingName, PlanetaryResourceType associatedResource, int cost, int buildingPriority, boolean partialBonus, String statModified, String completionRewardType, int completionValue)
+    public Building(String buildingName, PlanetaryResourceType associatedResource, int cost, int buildingPriority, boolean partialBonus, StatModified statModified, String completionRewardType, int completionValue)
     {
         this.buildingName = buildingName;
         this.associatedResource = associatedResource;

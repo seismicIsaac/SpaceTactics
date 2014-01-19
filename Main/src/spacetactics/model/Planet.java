@@ -23,7 +23,6 @@ public class Planet {
     private float researchBonus;
     private float productionBonus;
     // could add a bunch more specific bonuses but this is simple enough for now.
-    public HashMap<String, Number> planetarySpendingRatio = new HashMap<String, Number>();
 
     public String settledBy;
     public int currentPopulation;
@@ -31,9 +30,9 @@ public class Planet {
 
     public int factoryCount;
     public int factoriesMax;
-    public ArrayList<PlanetaryResource> planetaryResources = new ArrayList<PlanetaryResource>();
+    public HashMap<PlanetaryResourceType, PlanetaryResource> planetaryResources = new HashMap<PlanetaryResourceType, PlanetaryResource>();
 
-    public Planet(int x, int y, String imageLocation, int height, int width, String planetType, int maxPop, ArrayList<PlanetaryResource> planetaryResources)
+    public Planet(int x, int y, String imageLocation, int height, int width, String planetType, int maxPop)
     {
         this.xPosition = x;
         this.yPosition = y;
@@ -42,7 +41,6 @@ public class Planet {
         this.interactWidth = width;
         this.starName = planetType;
         this.maxPopulation = maxPop;
-        this.planetaryResources = planetaryResources;
     }
 
     public void update(PlayerStats playerStats)

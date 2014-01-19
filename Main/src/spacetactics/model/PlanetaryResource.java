@@ -12,19 +12,32 @@ import java.util.HashMap;
  */
 public class PlanetaryResource {
 
-    public PlanetaryResourceType resourceType;
-    public float planetarySpending;
-    public float innatePlanetBonus;
-    public int flatProduction;
-    public int resourceSaved;
-    public int baseUnitCost;
-    public int baseUnitCount;
-    public float baseUnitProductionMultiplier;
-    public int baseUnitMax;
-    public int baseUnitCurrent;
-    public int currentDebt;
-    public ArrayList<Building> buildingQueue = new ArrayList<Building>();
-    public Building currentlyBuilding;
+    public PlanetaryResourceType resourceType;  //preset
+    public float planetarySpending;             //preset
+    public float innatePlanetBonus;             //defined by planet
+    public int flatProduction;                  //defined by player stats
+    public int baseUnitCost;                    //defined by player stats
+    public int baseUnitCount;                   //defined by player stats
+    public float baseUnitProductionMultiplier;  //defined by player stats
+    public int baseUnitMax;                     //defined by planet & player stats
+    public int baseUnitSize;                    //defined by player stats
+    public ArrayList<Building> buildingQueue = new ArrayList<Building>();//defined by player stats
+    public Building currentlyBuilding;          //defined by player stats
 
+    public PlanetaryResource(Planet planet, PlayerStats playerStats, PlanetaryResourceType planetaryResourceType)     //used for settling a colony/seeding a planet resources with players tech level
+    {
+        this.resourceType = planetaryResourceType;
+        this.flatProduction = playerStats.planetaryResourceStats.get(planetaryResourceType).flatProduction;
+        this.baseUnitCost = playerStats.planetaryResourceStats.get(planetaryResourceType).baseUnitCost;
+        this.baseUnitCount = playerStats.planetaryResourceStats.get(planetaryResourceType).baseUnitCount;
+        this.baseUnitProductionMultiplier = playerStats.planetaryResourceStats.get(planetaryResourceType).baseUnitProductionMultiplier;
+        this.baseUnitMax = planet.maxPopulation / playerStats.planetaryResourceStats.get(planetaryResourceType).baseUnitSize;
+        this.buildingQueue = playerStats.planetaryResourceStats.get(planetaryResourceType).buildingQueue;
+    }
+
+    public PlanetaryResource()
+    {
+
+    }
 
 }

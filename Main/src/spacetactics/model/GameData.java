@@ -4,6 +4,7 @@ import spacetactics.controller.DataLoader;
 import spacetactics.controller.GameSimulation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +18,7 @@ public class GameData {
     public GameSimulation gameSimulation;
     public LocalUniverse localUniverse;
     public ArrayList<Building> allBuildings;
-    public ArrayList<PlayerStats> players;
+    public HashMap<String, PlayerStats> players;
 
 
 
