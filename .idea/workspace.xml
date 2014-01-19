@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e15c1dc-771f-4cfe-aa1b-5fea6c29dfe3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/iaustin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Android/assets/data/initialBuildings.txt" />
-      <change type="DELETED" beforePath="C:\Users\iaustin\Documents\GitHub\SpaceTactics\Android\assets\data\testBuilding.txt" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\iaustin\Documents\GitHub\SpaceTactics\Android\assets\next turn button.png" afterPath="$PROJECT_DIR$/Android/assets/nextTurnButton.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/spacetactics/model/Building.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/model/Building.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/spacetactics/model/GameData.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/model/GameData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/spacetactics/controller/GameSimulation.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/controller/GameSimulation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/spacetactics/controller/test/JsonParserTest.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/controller/test/JsonParserTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/spacetactics/model/LocalUniverse.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/model/LocalUniverse.java" />
-      <change type="MODIFICATION" beforePath="C:\Users\iaustin\Documents\GitHub\SpaceTactics\Main\src\spacetactics\view\planetobserverscreen\NextTurnButton.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/view/planetobserverscreen/NextTurnButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/spacetactics/model/Planet.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/model/Planet.java" />
-      <change type="MODIFICATION" beforePath="C:\Users\iaustin\Documents\GitHub\SpaceTactics\Main\src\spacetactics\view\planetobserverscreen\PlanetObserverScreen.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/view/planetobserverscreen/PlanetObserverScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/spacetactics/model/PlanetaryResource.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/model/PlanetaryResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/spacetactics/controller/PlanetaryResourceController.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/controller/PlanetaryResourceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/src/spacetactics/model/PlayerStats.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/model/PlayerStats.java" />
-      <change type="MODIFICATION" beforePath="C:\Users\iaustin\Documents\GitHub\SpaceTactics\Main\src\spacetactics\view\planetobserverscreen\SettleColonyButton.java" afterPath="$PROJECT_DIR$/Main/src/spacetactics/view/planetobserverscreen/SettleColonyButton.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Main/src/spacetactics/controller/test/TomTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SpaceTactics.iws" />
@@ -133,15 +118,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PlanetaryResourceController.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Main/src/spacetactics/controller/PlanetaryResourceController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="3" selection-start="311" selection-end="311" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SettleColonyButton.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main/src/spacetactics/view/planetobserverscreen/SettleColonyButton.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -160,10 +136,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="initialBuildings.txt" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="initialBuildings.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Android/assets/data/initialBuildings.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TomTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Main/src/spacetactics/controller/test/TomTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="22" selection-start="217" selection-end="217" vertical-scroll-proportion="0.25331125">
               <folding />
             </state>
           </provider>
@@ -263,7 +248,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-9" />
     <option name="y" value="-9" />
-    <option name="width" value="1938" />
+    <option name="width" value="1932" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -796,8 +781,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="1" />
-    <editor active="false" />
+    <frame x="-9" y="-9" width="1932" height="1050" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -812,7 +797,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.73476297" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2705443" sideWeight="0.73476297" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27141327" sideWeight="0.73476297" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26463965" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -887,13 +872,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Main/src/spacetactics/model/LocalUniverse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="0" selection-start="2120" selection-end="2120" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Main/src/spacetactics/model/PlanetaryResourceType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="12" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0" />
@@ -993,6 +971,13 @@
     <entry file="file://$PROJECT_DIR$/Android/assets/data/initialBuildings.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/src/spacetactics/controller/test/TomTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="22" selection-start="217" selection-end="217" vertical-scroll-proportion="0.25331125">
           <folding />
         </state>
       </provider>
