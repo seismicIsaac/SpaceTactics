@@ -18,7 +18,7 @@ public class GameSimulation {
 
     public void initializeNewGame(GameData gameData, SpaceTactics spaceTactics)
     {
-        spaceTactics.dataLoader.loadData(gameData.allBuildings, "data/testBuilding.txt");
+        spaceTactics.dataLoader.loadData(gameData.allBuildings, "data/initialBuildings.txt");
         gameData.localUniverse = new LocalUniverse(spaceTactics.APPLICATION_WIDTH, spaceTactics.APPLICATION_HEIGHT);
     }
 

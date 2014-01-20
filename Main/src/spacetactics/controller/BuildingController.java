@@ -39,7 +39,7 @@ public class BuildingController {
 
         if (planetaryResource.currentlyBuilding.buildingPriority == 0)
         {
-            Building building = new Building("<Nothing>", planetaryResource.resourceType, 10000000, 1, false, "None", "None", 0);
+            Building building = new Building("<Nothing>", planetaryResource.resourceType, 10000000, 1, false, Building.StatModified.NONE, "None", 0);
             planetaryResource.buildingQueue.add(building);
             planetaryResource.currentlyBuilding = building;
         }

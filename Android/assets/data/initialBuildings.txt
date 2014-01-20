@@ -13,7 +13,7 @@ partialCompletionPayedSoFar:0},
 
 {class:spacetactics.model.Building,
 associatedResource:ECOLOGY,
-buildingName:Terraforming +10,
+buildingName:"Terraforming +10",
 cost:1000,
 buildingPriority:10,
 partialBonus:true,
@@ -29,6 +29,6 @@ cost:2000,
 buildingPriority:10,
 partialBonus:false,
 statModified:BASE_UNIT_PRODUCTION_MULTIPLIER,
-completionRewardType:GenericStatMod
-completionValue:0.2}
+completionRewardType:GenericStatMod,
+completionValue:1}
 ]

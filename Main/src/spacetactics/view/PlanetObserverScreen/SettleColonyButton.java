@@ -17,7 +17,7 @@ public class SettleColonyButton extends Button implements Clickable {
     @Override
     public void onClick() {
         System.out.println("Settle Colony");
-        if (planetObserverScreen.selectedPlanetView.planet.settledBy != "Player1")
+        if (planetObserverScreen.selectedPlanetView.planet.settledBy != null && planetObserverScreen.selectedPlanetView.planet.settledBy != "Player1")
         {
             planetObserverScreen.spaceTactics.gameSimulation.settleColony(planetObserverScreen.selectedPlanetView.planet, planetObserverScreen.spaceTactics.gameData.players.get("Player1"));
         }

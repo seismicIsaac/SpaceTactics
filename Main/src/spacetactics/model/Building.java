@@ -21,7 +21,7 @@ public class Building {
     public StatModified statModified;                             //from dat
 
     public enum StatModified{
-       BASE_UNIT_COUNT, BASE_UNIT_PRODUCTION_MULTIPLIER, MAX_POPULATION, FLAT_PRODUCTION
+       BASE_UNIT_COUNT, BASE_UNIT_MAX, BASE_UNIT_PRODUCTION_MULTIPLIER, MAX_POPULATION, FLAT_PRODUCTION, SPECIAL, NONE
     }
     public Building()
     {

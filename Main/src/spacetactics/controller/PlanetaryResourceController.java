@@ -78,12 +78,12 @@ public class PlanetaryResourceController {
 
     public void genericStatMod(PlanetaryResource planetaryResource)
     {
-        if (planetaryResource.currentlyBuilding.statModified == "baseUnitCount")
+        if (planetaryResource.currentlyBuilding.statModified == Building.StatModified.BASE_UNIT_COUNT)
         {
             planetaryResource.baseUnitCount += calculateStatModification(planetaryResource);
         }
 
-        if (planetaryResource.currentlyBuilding.statModified == "baseUnitMax")
+        if (planetaryResource.currentlyBuilding.statModified == Building.StatModified.BASE_UNIT_MAX)
         {
             planetaryResource.baseUnitMax += calculateStatModification(planetaryResource);
         }

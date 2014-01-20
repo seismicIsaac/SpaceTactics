@@ -45,9 +45,9 @@ public class LocalUniverse {
                 prod.innatePlanetBonus = 1;
                 prod.baseUnitMax = 100;
 
-                Building building = new Building("Factories", PlanetaryResourceType.INDUSTRY, 1000, 10, true, "baseUnitCount", "GenericStatMod", 100);
+                Building building = new Building("Factories", PlanetaryResourceType.INDUSTRY, 1000, 10, true, Building.StatModified.BASE_UNIT_COUNT, "GenericStatMod", 100);
                 prod.currentlyBuilding = building;
-                Building building2 = new Building("Tech Lab", PlanetaryResourceType.SCIENCE, 250, 50, false, "baseUnitCount", "GenericStatMod", 20);
+                Building building2 = new Building("Tech Lab", PlanetaryResourceType.SCIENCE, 250, 50, false, Building.StatModified.FLAT_PRODUCTION, "GenericStatMod", 20);
                 prod.buildingQueue.add(building);
                 prod.buildingQueue.add(building2);
 

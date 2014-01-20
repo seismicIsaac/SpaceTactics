@@ -22,7 +22,7 @@ public class JsonParserTest {
     public static void main(String[] args)
     {
         JsonParserTest jsonParserTest = new JsonParserTest();
-        jsonParserTest.building = new Building("Tech Lab", PlanetaryResourceType.INDUSTRY, 1000, 100, false, "baseUnitCost", "GenericStatMod", 5);
+        jsonParserTest.building = new Building("Tech Lab", PlanetaryResourceType.INDUSTRY, 1000, 100, false, Building.StatModified.FLAT_PRODUCTION, "GenericStatMod", 5);
 
         String temp = (jsonParserTest.json.toJson(jsonParserTest.building));
 
