@@ -1,6 +1,9 @@
 package spacetactics.controller;
 
-import spacetactics.model.PlayerStats;
+import spacetactics.model.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,11 +14,19 @@ import spacetactics.model.PlayerStats;
  */
 public class PlayerStatsController {
 
+    private final String initialBuildingsFileName = "data/initialBuildings";
+
     public PlanetaryResourceController planetaryResourceController;
+    public DataLoader dataLoader = new DataLoader();
 
     public void annualUpdatePlayerStats(PlayerStats playerStats)
     {
         planetaryResourceController.calculateProductionOnPlanets(playerStats);
+    }
+
+    public void updateMasterBuildQueue()
+    {
+
     }
 
     public PlayerStatsController ()

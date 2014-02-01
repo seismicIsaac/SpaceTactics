@@ -24,7 +24,7 @@ public class Planet {
     private float productionBonus;
     // could add a bunch more specific bonuses but this is simple enough for now.
 
-    public String settledBy;
+    public PlayerSlot settledBy;
     public int currentPopulation;
     public final int maxPopulation;
 
@@ -47,7 +47,7 @@ public class Planet {
     {
        // making up some calculations for updating stats
        // Factory/prod first
-       float planetProduction = getProductionFromFactories(playerStats);
+
 
 
     }
@@ -55,11 +55,6 @@ public class Planet {
     public void divideSpending()
     {
 
-    }
-
-    public float getProductionFromFactories(PlayerStats playerStats)
-    {
-        return factoryCount * playerStats.prodPerFactory * productionBonus; //* planetarySpendingRatio("production");
     }
 
     public String getImageLocation() {

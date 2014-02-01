@@ -2,6 +2,7 @@ package spacetactics.model;
 
 import spacetactics.controller.DataLoader;
 import spacetactics.controller.GameSimulation;
+import spacetactics.controller.PlayerStatsController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,14 @@ public class GameData {
     public GameSimulation gameSimulation;
     public LocalUniverse localUniverse;
     public ArrayList<Building> allBuildings;
-    public HashMap<String, PlayerStats> players;
+    public ArrayList<Technology> allTechnologies;
+    public HashMap<PlayerSlot, PlayerStats> players = new HashMap<PlayerSlot, PlayerStats>();
+
+    public GameData(GameSimulation gameSimulation)
+    {
+        this.gameSimulation = gameSimulation;
+    }
+
 
 
 

@@ -1,5 +1,8 @@
 package spacetactics.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created with IntelliJ IDEA.
  * User: iaustin
@@ -9,8 +12,15 @@ package spacetactics.model;
  */
 public class Technology {
 
-
-
+    public TechnologyInternalName internalName;
+    public TechnologyResearchType researchType;
+    public String externalName;
+    public ArrayList<ComplexPrerequisite> prerequisites;
+    public ArrayList<TechnologyInternalName> requisiteFor;
     public int cost;
 
+    public Technology()
+    {
+
+    }
 }

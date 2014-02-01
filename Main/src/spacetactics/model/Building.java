@@ -1,5 +1,7 @@
 package spacetactics.model;
 
+import java.util.ArrayList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: iaustin
@@ -19,6 +21,7 @@ public class Building {
     public int partialCompletionPayedSoFar;                  //preset to 0 on init
     public int progress;                                    //preset to 0 on initialization
     public StatModified statModified;                             //from dat
+    public ArrayList<Technology> prerequisiteTechs;         //from dat
 
     public enum StatModified{
        BASE_UNIT_COUNT, BASE_UNIT_MAX, BASE_UNIT_PRODUCTION_MULTIPLIER, MAX_POPULATION, FLAT_PRODUCTION, SPECIAL, NONE
@@ -41,4 +44,6 @@ public class Building {
         this.progress = 0;
         this.partialCompletionPayedSoFar = 0;
     }
+
+
 }

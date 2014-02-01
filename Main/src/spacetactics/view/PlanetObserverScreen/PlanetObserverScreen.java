@@ -7,9 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import spacetactics.SpaceTactics;
 import spacetactics.controller.PlanetaryResourceController;
 import spacetactics.controller.PlayerStatsController;
-import spacetactics.model.Planet;
-import spacetactics.model.LocalUniverse;
-import spacetactics.model.PlayerStats;
+import spacetactics.model.*;
 import spacetactics.view.Button;
 import spacetactics.view.Clickable;
 
@@ -31,7 +29,6 @@ public class PlanetObserverScreen implements Screen {
     public ArrayList<Clickable> clickables = new ArrayList<Clickable>();
     public HashMap<String, Texture> textureAtlas = new HashMap<String, Texture>();
     public PlayerStatsController playerStatsController = new PlayerStatsController();
-    public PlayerStats playerStats = new PlayerStats();
     public PlanetaryResourceController planetaryResourceController = new PlanetaryResourceController();
     public NextTurnButton nextTurnButton = new NextTurnButton(1085, 25, 185, 61, "nextTurnButton.png", this);
     public SettleColonyButton settleColonyButton = new SettleColonyButton(1085, 300, 185, 61, "settleColonyButton.png", this);
@@ -61,14 +58,18 @@ public class PlanetObserverScreen implements Screen {
     public void displaySelectedPlanetStats()
     {
         String planetStats = new String("Max Population: " + selectedPlanetView.planet.maxPopulation + "  X:" + selectedPlanetView.planet.xPosition + "  Y:" + selectedPlanetView.planet.yPosition);
-        //String planetStats2 = new String("Factories: " + selectedPlanetView.planet.planetaryResources.get(0).baseUnitCount);
-//        String currentlyBuilding = new String("Currently Building: " + selectedPlanetView.planet.planetaryResources.get(0).currentlyBuilding.buildingName);
-//        String buildingProgress = new String("Progress: " + selectedPlanetView.planet.planetaryResources.get(0).currentlyBuilding.progress);
 
+        if(selectedPlanetView.planet.settledBy == PlayerSlot.PLAYER1)
+        {
+            String planetStats2 = new String("Factories: " + selectedPlanetView.planet.planetaryResources.get(PlanetaryResourceType.INDUSTRY).baseUnitCount);
+            String currentlyBuilding = new String("Currently Building: " + selectedPlanetView.planet.planetaryResources.get(PlanetaryResourceType.INDUSTRY).currentlyBuilding.buildingName);
+            String buildingProgress = new String("Progress: " + selectedPlanetView.planet.planetaryResources.get(PlanetaryResourceType.INDUSTRY).currentlyBuilding.progress);
+
+            spaceTactics.font.draw(spaceTactics.batch, planetStats2, 1000, 575);
+            spaceTactics.font.draw(spaceTactics.batch, currentlyBuilding, 1000, 550);
+            spaceTactics.font.draw(spaceTactics.batch, buildingProgress, 1000, 525);
+        }
         spaceTactics.font.draw(spaceTactics.batch, planetStats, 1000, 600);
-//        spaceTactics.font.draw(spaceTactics.batch, planetStats2, 1000, 575);
-//        spaceTactics.font.draw(spaceTactics.batch, currentlyBuilding, 1000, 550);
-//        spaceTactics.font.draw(spaceTactics.batch, buildingProgress, 1000, 525);
     }
 
     public void drawHud()
@@ -94,7 +95,6 @@ public class PlanetObserverScreen implements Screen {
         clickables.add(nextTurnButton);
         clickables.add(settleColonyButton);
 
-        playerStats.settledPlanets = localUniverse.getPlanets();
         playerStatsController.planetaryResourceController = planetaryResourceController;
 
     }

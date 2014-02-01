@@ -1,0 +1,33 @@
+[
+	{
+	class: spacetactics.model.Technology,
+	internalName: FACTORY_COST_10,
+	cost: 250,
+	researchType: CONSTRUCTION,
+	externalName: "Factory Construction - 10"
+	},
+	
+	{
+	class: spacetactics.model.Technology,
+	internalName: IMPROVED_ECO_RESTORATION_1,
+	cost: 540,
+	researchType: ECOLOGY,
+	externalName: "Basic Eco Restoration"
+	},
+	
+	{
+	class: spacetactics.model.Technology,
+	internalName: IMPROVED_ECO_RESTORATION_3,
+	cost: 2500,
+	researchType: ECOLOGY,
+	externalName: "Improved Eco Restoration",
+	prerequisites: [
+		{
+			requiredToUnlock: [
+				IMPROVED_ECO_RESTORATION_1,
+				TERRAFORMING_10
+			]
+		}
+	]
+}
+]

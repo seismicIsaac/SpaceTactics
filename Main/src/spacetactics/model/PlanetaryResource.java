@@ -33,6 +33,19 @@ public class PlanetaryResource {
         this.baseUnitProductionMultiplier = playerStats.planetaryResourceStats.get(planetaryResourceType).baseUnitProductionMultiplier;
         this.baseUnitMax = planet.maxPopulation / playerStats.planetaryResourceStats.get(planetaryResourceType).baseUnitSize;
         this.buildingQueue = playerStats.planetaryResourceStats.get(planetaryResourceType).buildingQueue;
+        this.currentlyBuilding = playerStats.planetaryResourceStats.get(planetaryResourceType).currentlyBuilding;
+    }
+
+    public PlanetaryResource(PlanetaryResourceType resourceType)
+    {
+        this.resourceType = resourceType;
+        this.flatProduction = 0;
+        this.baseUnitCost = 10;
+        this.baseUnitCount = 1;
+        this.baseUnitProductionMultiplier = 1;
+        this.baseUnitSize = 10;
+        this.buildingQueue = new ArrayList<Building>();
+
     }
 
     public PlanetaryResource()

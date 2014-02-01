@@ -1,5 +1,7 @@
 package spacetactics.model;
 
+import spacetactics.controller.DataLoader;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,17 +14,50 @@ import java.util.HashMap;
  */
 public class PlayerStats {
 
-    public int prodPerFactory = 1;
+    private final String initialBuildingsFileName = "data/initialBuildings.txt";
+    private DataLoader dataLoader = new DataLoader();
 
     public String playerName;
-    public String playerSlot;
+    public PlayerSlot playerSlot;
     public HashMap<PlanetaryResourceType, PlanetaryResource> planetaryResourceStats = new HashMap<PlanetaryResourceType, PlanetaryResource>();
+    public HashMap<TechnologyInternalName, Technology> researchedTechnologies = new HashMap<TechnologyInternalName, Technology>();
+    public ArrayList<Building> masterBuildQueue = new ArrayList<Building>();
     public ArrayList<Planet> settledPlanets;
-    public ArrayList<Technology> researchedTechnologies;
 
-    public PlayerStats()
+    public PlayerStats(PlayerSlot playerSlot)
     {
-
+        this.playerSlot = playerSlot;
+        this.planetaryResourceStats = getInitialPlanetaryResources();
+        this.masterBuildQueue = getInitialBuildQueue();
+        System.out.println("New Player Stats");
+        for (Building building: masterBuildQueue)
+        {
+            planetaryResourceStats.get(building.associatedResource).buildingQueue.add(building);
+            planetaryResourceStats.get(building.associatedResource).currentlyBuilding = building;
+            System.out.println("Hi");
+            System.out.println(planetaryResourceStats.get(building.associatedResource).currentlyBuilding.buildingName);
+        }
     }
+
+    public HashMap<PlanetaryResourceType, PlanetaryResource> getInitialPlanetaryResources()
+    {
+        HashMap<PlanetaryResourceType, PlanetaryResource> initialResources = new HashMap<PlanetaryResourceType, PlanetaryResource>();
+        PlanetaryResource industry = new PlanetaryResource(PlanetaryResourceType.INDUSTRY);
+        PlanetaryResource ecology = new PlanetaryResource(PlanetaryResourceType.ECOLOGY);
+        PlanetaryResource science = new PlanetaryResource(PlanetaryResourceType.SCIENCE);
+        initialResources.put(industry.resourceType, industry);
+        initialResources.put(ecology.resourceType, ecology);
+        initialResources.put(science.resourceType, science);
+
+        return initialResources;
+    }
+
+    public ArrayList<Building> getInitialBuildQueue()
+    {
+        ArrayList<Building> initialBuildQueue = dataLoader.returnListFromDataFile(initialBuildingsFileName);
+
+        return initialBuildQueue;
+    }
+
 
 }

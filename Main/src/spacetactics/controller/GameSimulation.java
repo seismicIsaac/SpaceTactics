@@ -14,12 +14,15 @@ import java.util.HashMap;
  */
 public class GameSimulation {
 
-    private PlanetaryResourceController planetaryResourceController;
+    private PlanetaryResourceController planetaryResourceController = new PlanetaryResourceController();
+    private PlayerStatsController playerStatsController = new PlayerStatsController();
 
     public void initializeNewGame(GameData gameData, SpaceTactics spaceTactics)
     {
-        spaceTactics.dataLoader.loadData(gameData.allBuildings, "data/initialBuildings.txt");
-        gameData.localUniverse = new LocalUniverse(spaceTactics.APPLICATION_WIDTH, spaceTactics.APPLICATION_HEIGHT);
+
+        gameData.localUniverse = new LocalUniverse(spaceTactics.APPLICATION_WIDTH, spaceTactics.APPLICATION_HEIGHT, spaceTactics);
+        gameData.players.put(PlayerSlot.PLAYER1, new PlayerStats(PlayerSlot.PLAYER1));
+
     }
 
     public void nextTurn()

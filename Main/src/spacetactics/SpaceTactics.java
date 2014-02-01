@@ -22,7 +22,7 @@ import spacetactics.view.planetobserverscreen.PlanetObserverScreen;
  */
 public class SpaceTactics extends Game {
 
-    public GameData gameData = new GameData();
+    public GameData gameData;
     public GameSimulation gameSimulation = new GameSimulation();
     public DataLoader dataLoader = new DataLoader();
 
@@ -45,7 +45,7 @@ public class SpaceTactics extends Game {
     public void create() {
         // Set Screen to Main menu -->
         // From Main Menu we decide what else to do
-
+        gameData = new GameData(gameSimulation);
         gameSimulation.initializeNewGame(gameData, this);
 
         batch = new SpriteBatch();

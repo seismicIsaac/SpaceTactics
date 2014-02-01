@@ -21,7 +21,7 @@ public class PlanetaryResourceController {
     public void initalizeNewColonyResources(Planet planet, PlayerStats playerStats)
     {
         HashMap<PlanetaryResourceType, PlanetaryResource> initialPlanetaryResources = new HashMap<PlanetaryResourceType, PlanetaryResource>();
-
+        System.out.println("Setting new resources");
         PlanetaryResource industry = new PlanetaryResource(planet, playerStats, PlanetaryResourceType.INDUSTRY);
         initialPlanetaryResources.put(PlanetaryResourceType.INDUSTRY, industry);
         PlanetaryResource science = new PlanetaryResource(planet, playerStats, PlanetaryResourceType.SCIENCE);
@@ -103,6 +103,11 @@ public class PlanetaryResourceController {
     }
 
     public void updateBuildQueue(PlanetaryResource planetaryResource, ArrayList<Technology> playerTechnologies)
+    {
+
+    }
+
+    public void initializeBuildingQueue()
     {
 
     }

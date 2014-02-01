@@ -7,6 +7,8 @@ package spacetactics.model;
  * Time: 12:45 AM
  * To change this template use File | Settings | File Templates.
  */
+import spacetactics.SpaceTactics;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,13 +19,14 @@ public class LocalUniverse {
     private final int MINIMUM_DISTANCE = 20;
     private final int MAX_POP = 150;
     private final int MIN_POP = 35;
+    private final int UNIVERSE_SIZE = 5;
 
-    public LocalUniverse(int width, int height)
+    public LocalUniverse(int width, int height, SpaceTactics spaceTactics)
     {
         //TODO: add some awesome algorithm for spawning 'dem planets
         Random random = new Random();
 
-        while (planets.size() < 5)
+        while (planets.size() < UNIVERSE_SIZE)
         {
             int x = random.nextInt(width) + 1;
             int y = random.nextInt(height) + 1;
@@ -36,38 +39,14 @@ public class LocalUniverse {
                 String imgLocation = planetName;
                 int planetInteractSquareDimension = 39;
 
-                ArrayList<PlanetaryResource> defaultResources = new ArrayList<PlanetaryResource>();
-                PlanetaryResource prod = new PlanetaryResource();
-                prod.planetarySpending = 1;
-                prod.baseUnitCost = 10;
-                prod.baseUnitCount = 1;
-                prod.baseUnitProductionMultiplier = 2;
-                prod.innatePlanetBonus = 1;
-                prod.baseUnitMax = 100;
-
-                Building building = new Building("Factories", PlanetaryResourceType.INDUSTRY, 1000, 10, true, Building.StatModified.BASE_UNIT_COUNT, "GenericStatMod", 100);
-                prod.currentlyBuilding = building;
-                Building building2 = new Building("Tech Lab", PlanetaryResourceType.SCIENCE, 250, 50, false, Building.StatModified.FLAT_PRODUCTION, "GenericStatMod", 20);
-                prod.buildingQueue.add(building);
-                prod.buildingQueue.add(building2);
-
-
-
-
                 Planet randomPlanet = new Planet(x, y, imgLocation, planetInteractSquareDimension, planetInteractSquareDimension, planetName, maxPop);
                 planets.add(randomPlanet);
-
             }
         }
-
     }
 
     public ArrayList <Planet> getPlanets() {
         return planets;
-    }
-
-    public void setPlanets(ArrayList <Planet> planets) {
-        this.planets = planets;
     }
 
     public String setStarName(int starType)
@@ -92,7 +71,6 @@ public class LocalUniverse {
                 planetName = "StarFinishRed01.png";
                 break;
         }
-
         return planetName;
     }
 
@@ -107,5 +85,4 @@ public class LocalUniverse {
         }
         return true;
     }
-
 }
