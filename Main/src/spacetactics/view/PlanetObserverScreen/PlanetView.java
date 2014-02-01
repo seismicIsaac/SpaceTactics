@@ -26,7 +26,6 @@ public class PlanetView extends Button implements Clickable
 
     @Override
     public void onClick() {
-        System.out.println(planet.imageLocation);
         isSelected = true;
         planetObserverScreen.selectedPlanetView = this;
     }

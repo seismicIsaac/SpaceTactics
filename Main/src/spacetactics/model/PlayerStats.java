@@ -29,13 +29,11 @@ public class PlayerStats {
         this.playerSlot = playerSlot;
         this.planetaryResourceStats = getInitialPlanetaryResources();
         this.masterBuildQueue = getInitialBuildQueue();
-        System.out.println("New Player Stats");
+
         for (Building building: masterBuildQueue)
         {
             planetaryResourceStats.get(building.associatedResource).buildingQueue.add(building);
             planetaryResourceStats.get(building.associatedResource).currentlyBuilding = building;
-            System.out.println("Hi");
-            System.out.println(planetaryResourceStats.get(building.associatedResource).currentlyBuilding.buildingName);
         }
     }
 

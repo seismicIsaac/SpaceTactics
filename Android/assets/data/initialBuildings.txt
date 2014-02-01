@@ -1,7 +1,7 @@
 [
 {class:spacetactics.model.Building,
 associatedResource:INDUSTRY,
-buildingName:Factories,
+buildingName:"Factories",
 cost:-1,
 progress:0,
 buildingPriority:10,
@@ -24,7 +24,7 @@ partialCompletionPayedSoFar:0},
 
 {class:spacetactics.model.Building,
 associatedResource:SCIENCE,
-buildingName:ResearchLab,
+buildingName:"ResearchLab",
 cost:2000,
 buildingPriority:10,
 partialBonus:false,

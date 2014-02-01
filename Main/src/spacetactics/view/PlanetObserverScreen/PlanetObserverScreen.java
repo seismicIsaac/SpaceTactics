@@ -76,7 +76,11 @@ public class PlanetObserverScreen implements Screen {
     {
         spaceTactics.batch.draw(this.textureAtlas.get(hudImageLocation),  0,  0);
         spaceTactics.batch.draw(this.textureAtlas.get(nextTurnButton.imageLocation), nextTurnButton.xPosition, nextTurnButton.yPosition);
-        spaceTactics.batch.draw(this.textureAtlas.get(settleColonyButton.imageLocation), settleColonyButton.xPosition, settleColonyButton.yPosition);
+
+        if(selectedPlanetView != null && selectedPlanetView.planet.settledBy != PlayerSlot.PLAYER1)
+        {
+            spaceTactics.batch.draw(this.textureAtlas.get(settleColonyButton.imageLocation), settleColonyButton.xPosition, settleColonyButton.yPosition);
+        }
     }
 
     public PlanetObserverScreen(LocalUniverse localUniverse, SpaceTactics spaceTactics)
@@ -91,12 +95,9 @@ public class PlanetObserverScreen implements Screen {
         }
 
         getPlanetViewTextures();
-
         clickables.add(nextTurnButton);
         clickables.add(settleColonyButton);
-
         playerStatsController.planetaryResourceController = planetaryResourceController;
-
     }
 
     @Override
