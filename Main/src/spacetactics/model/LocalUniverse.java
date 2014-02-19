@@ -15,11 +15,10 @@ import java.util.Random;
 public class LocalUniverse {
 
     private ArrayList <Planet> planets = new ArrayList<Planet>();
-    public ArrayList <PlayerStats> players = new ArrayList<PlayerStats>();
-    private final int MINIMUM_DISTANCE = 20;
+    private final int MINIMUM_DISTANCE = 30;
     private final int MAX_POP = 150;
     private final int MIN_POP = 35;
-    private final int UNIVERSE_SIZE = 5;
+    private final int UNIVERSE_SIZE = 20;
 
     public LocalUniverse(int width, int height, SpaceTactics spaceTactics)
     {

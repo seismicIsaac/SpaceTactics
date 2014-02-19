@@ -15,36 +15,32 @@ import java.util.HashMap;
  */
 public class PlanetaryResourceController {
 
-    public BuildingController buildingController;
+    public GameSimulation gameSimulation;
+
     private Json json = new Json();
-
-    public void initalizeNewColonyResources(Planet planet, PlayerStats playerStats)
-    {
-        HashMap<PlanetaryResourceType, PlanetaryResource> initialPlanetaryResources = new HashMap<PlanetaryResourceType, PlanetaryResource>();
-        System.out.println("Setting new resources");
-        PlanetaryResource industry = new PlanetaryResource(planet, playerStats, PlanetaryResourceType.INDUSTRY);
-        initialPlanetaryResources.put(PlanetaryResourceType.INDUSTRY, industry);
-        PlanetaryResource science = new PlanetaryResource(planet, playerStats, PlanetaryResourceType.SCIENCE);
-        initialPlanetaryResources.put(PlanetaryResourceType.SCIENCE, science);
-        PlanetaryResource ecology = new PlanetaryResource(planet, playerStats, PlanetaryResourceType.ECOLOGY);
-        initialPlanetaryResources.put(PlanetaryResourceType.ECOLOGY, ecology);
-
-        planet.planetaryResources = initialPlanetaryResources;
-    }
 
     public void calculateProductionOnPlanets(PlayerStats playerStats)
     {
         for (Planet planet : playerStats.settledPlanets)
         {
+            int researchPointsBudget = 0;
+
             for (PlanetaryResourceType planetaryResourceType : PlanetaryResourceType.values())
             {
                 float budget = getResourceProduction(planet.planetaryResources.get(planetaryResourceType));
+
+                if (planetaryResourceType == PlanetaryResourceType.SCIENCE)
+                {
+                    researchPointsBudget += budget;
+                }
 
                 if (planet.planetaryResources.get(planetaryResourceType).currentlyBuilding.buildingName != "<Nothing>");
                 {
                     processBuildingRequest(budget, planet.planetaryResources.get(planetaryResourceType));
                 }
             }
+
+            gameSimulation.technologyController.processResearchPoints(playerStats, researchPointsBudget);
         }
     }
 
@@ -52,10 +48,10 @@ public class PlanetaryResourceController {
     {
         if (budget + planetaryResource.currentlyBuilding.progress >= planetaryResource.currentlyBuilding.cost)
         {
-            buildingController.setBuildingComplete(planetaryResource);
-            buildingController.applyCompletionBonus(planetaryResource);
+            gameSimulation.buildingController.setBuildingComplete(planetaryResource);
+            gameSimulation.buildingController.applyCompletionBonus(planetaryResource);
             budget = budget + planetaryResource.currentlyBuilding.progress - planetaryResource.currentlyBuilding.cost;
-            planetaryResource.currentlyBuilding = buildingController.pickNextBuilding(planetaryResource);
+            planetaryResource.currentlyBuilding = gameSimulation.buildingController.pickNextQueuedBuilding(planetaryResource);
             processBuildingRequest(budget, planetaryResource);
 
         }
@@ -65,25 +61,31 @@ public class PlanetaryResourceController {
 
             if (planetaryResource.currentlyBuilding.partialBonus)
             {
-               buildingController.applyCompletionBonus(planetaryResource);
+               gameSimulation.buildingController.applyCompletionBonus(planetaryResource);
             }
         }
+    }
+
+    public void processResearchPoints(PlayerStats playerStats, int researchPoints)
+    {
+
     }
 
     public float getResourceProduction(PlanetaryResource planetaryResource)
     {
         System.out.println("Production: " + planetaryResource.baseUnitCount * planetaryResource.baseUnitProductionMultiplier * planetaryResource.innatePlanetBonus * planetaryResource.planetarySpending);
+
         return (planetaryResource.baseUnitCount * planetaryResource.baseUnitProductionMultiplier * planetaryResource.innatePlanetBonus * planetaryResource.planetarySpending);
     }
 
     public void genericStatMod(PlanetaryResource planetaryResource)
     {
-        if (planetaryResource.currentlyBuilding.statModified == Building.StatModified.BASE_UNIT_COUNT)
+        if (planetaryResource.currentlyBuilding.statModified == PlanetaryStatName.BASE_UNIT_PRODUCTION_MULTIPLIER)
         {
             planetaryResource.baseUnitCount += calculateStatModification(planetaryResource);
         }
 
-        if (planetaryResource.currentlyBuilding.statModified == Building.StatModified.BASE_UNIT_MAX)
+        if (planetaryResource.currentlyBuilding.statModified == PlanetaryStatName.BASE_UNIT_MAX)
         {
             planetaryResource.baseUnitMax += calculateStatModification(planetaryResource);
         }
@@ -107,14 +109,25 @@ public class PlanetaryResourceController {
 
     }
 
-    public void initializeBuildingQueue()
+    public void initalizeNewColonyResources(Planet planet, PlayerStats playerStats)
     {
+        HashMap<PlanetaryResourceType, PlanetaryResource> initialPlanetaryResources = new HashMap<PlanetaryResourceType, PlanetaryResource>();
+        System.out.println("Setting new resources");
+        PlanetaryResource industry = new PlanetaryResource(planet, playerStats, PlanetaryResourceType.INDUSTRY);
+        initialPlanetaryResources.put(PlanetaryResourceType.INDUSTRY, industry);
+        gameSimulation.buildingController.pickBuilding(industry, industry.buildingQueue.get(0));
+        PlanetaryResource science = new PlanetaryResource(planet, playerStats, PlanetaryResourceType.SCIENCE);
+        initialPlanetaryResources.put(PlanetaryResourceType.SCIENCE, science);
+        gameSimulation.buildingController.pickBuilding(science, science.buildingQueue.get(0));
+        PlanetaryResource ecology = new PlanetaryResource(planet, playerStats, PlanetaryResourceType.ECOLOGY);
+        initialPlanetaryResources.put(PlanetaryResourceType.ECOLOGY, ecology);
+        gameSimulation.buildingController.pickBuilding(ecology, ecology.buildingQueue.get(0));
 
+        planet.planetaryResources = initialPlanetaryResources;
     }
 
-    public PlanetaryResourceController()
+    public PlanetaryResourceController(GameSimulation gameSimulation)
     {
-        BuildingController buildingController = new BuildingController(this);
-        this.buildingController = buildingController;
+        this.gameSimulation = gameSimulation;
     }
 }

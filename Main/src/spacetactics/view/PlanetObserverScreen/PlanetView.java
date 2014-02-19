@@ -28,6 +28,7 @@ public class PlanetView extends Button implements Clickable
     public void onClick() {
         isSelected = true;
         planetObserverScreen.selectedPlanetView = this;
+        planetObserverScreen.settleColonyButton.selectedPlanetView = this;
     }
 
     @Override

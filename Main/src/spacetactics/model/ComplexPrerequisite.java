@@ -1,6 +1,7 @@
 package spacetactics.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,6 +12,6 @@ import java.util.ArrayList;
  */
 public class ComplexPrerequisite {
 
-    public ArrayList<TechnologyInternalName> requiredToUnlock;
+    public HashMap<TechnologyInternalName, Boolean> requiredToUnlock;
     public boolean prerequisiteMet;
 }

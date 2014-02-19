@@ -28,7 +28,7 @@ public class SpaceTactics extends Game {
 
     public SpriteBatch batch;
     private InputHandler inputHandler;
-    private PlanetObserverScreen planetObserverScreen;
+    public PlanetObserverScreen planetObserverScreen;
     public final int APPLICATION_WIDTH;
     public final int APPLICATION_HEIGHT;
     public BitmapFont font;

@@ -1,7 +1,8 @@
 package spacetactics.model;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,6 +13,8 @@ import java.util.HashMap;
  */
 public class Planet {
 
+    private static Random randomNumGenerator = new Random();
+
     public int xPosition;
     public int yPosition;
     public String imageLocation; //should this go into planetView? yes.
@@ -19,17 +22,11 @@ public class Planet {
     public int interactWidth; //should this go into planetView? yes.
     public String starName;
 
-    private float growthBonus;
-    private float researchBonus;
-    private float productionBonus;
-    // could add a bunch more specific bonuses but this is simple enough for now.
+    public HashMap<PlanetaryResourceType, Float> ProductionBonusByResourceType = new HashMap<PlanetaryResourceType, Float>();
 
     public PlayerSlot settledBy;
-    public int currentPopulation;
-    public final int maxPopulation;
+    public int maxPopulation;
 
-    public int factoryCount;
-    public int factoriesMax;
     public HashMap<PlanetaryResourceType, PlanetaryResource> planetaryResources = new HashMap<PlanetaryResourceType, PlanetaryResource>();
 
     public Planet(int x, int y, String imageLocation, int height, int width, String planetType, int maxPop)
@@ -41,35 +38,16 @@ public class Planet {
         this.interactWidth = width;
         this.starName = planetType;
         this.maxPopulation = maxPop;
+
+        ProductionBonusByResourceType.put(PlanetaryResourceType.INDUSTRY, getRandomProductionBonus());
+        ProductionBonusByResourceType.put(PlanetaryResourceType.ECOLOGY, getRandomProductionBonus());
+        ProductionBonusByResourceType.put(PlanetaryResourceType.SCIENCE, getRandomProductionBonus());
     }
 
-    public void update(PlayerStats playerStats)
+    public float getRandomProductionBonus()
     {
-       // making up some calculations for updating stats
-       // Factory/prod first
-
-
-
-    }
-
-    public void divideSpending()
-    {
-
-    }
-
-    public String getImageLocation() {
-        return imageLocation;
-    }
-
-    public void setImageLocation(String imageLocation) {
-        this.imageLocation = imageLocation;
-    }
-
-    public String getStarName() {
-        return starName;
-    }
-
-    public void setStarName(String starName) {
-        this.starName = starName;
+        double productionBonus = new Double(Math.abs(1 - randomNumGenerator.nextGaussian()));
+        float blah = (float) productionBonus;
+        return blah;
     }
 }

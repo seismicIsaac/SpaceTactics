@@ -12,10 +12,10 @@ public class Button implements Clickable {
 
     public int xPosition;
     public int yPosition;
-    public int buttonWidth;
-    public int buttonHeight;
+    public final int buttonWidth;
+    public final int buttonHeight;
 
-    public String imageLocation;
+    public final String imageLocation;
 
     public void onClick()
     {

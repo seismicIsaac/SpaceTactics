@@ -20,9 +20,10 @@ public class PlayerStats {
     public String playerName;
     public PlayerSlot playerSlot;
     public HashMap<PlanetaryResourceType, PlanetaryResource> planetaryResourceStats = new HashMap<PlanetaryResourceType, PlanetaryResource>();
-    public HashMap<TechnologyInternalName, Technology> researchedTechnologies = new HashMap<TechnologyInternalName, Technology>();
-    public ArrayList<Building> masterBuildQueue = new ArrayList<Building>();
-    public ArrayList<Planet> settledPlanets;
+    public HashMap<TechnologyInternalName, Technology> allResearchableTechnologies = new HashMap<TechnologyInternalName, Technology>();
+    public HashMap<BuildingName, Building> masterBuildQueue = new HashMap<BuildingName, Building>();
+    public ArrayList<Planet> settledPlanets = new ArrayList<Planet>();
+    public Technology currentlyResearching;
 
     public PlayerStats(PlayerSlot playerSlot)
     {
@@ -30,7 +31,7 @@ public class PlayerStats {
         this.planetaryResourceStats = getInitialPlanetaryResources();
         this.masterBuildQueue = getInitialBuildQueue();
 
-        for (Building building: masterBuildQueue)
+        for (Building building: masterBuildQueue.values())
         {
             planetaryResourceStats.get(building.associatedResource).buildingQueue.add(building);
             planetaryResourceStats.get(building.associatedResource).currentlyBuilding = building;
@@ -50,11 +51,17 @@ public class PlayerStats {
         return initialResources;
     }
 
-    public ArrayList<Building> getInitialBuildQueue()
+    public HashMap<BuildingName, Building> getInitialBuildQueue()
     {
         ArrayList<Building> initialBuildQueue = dataLoader.returnListFromDataFile(initialBuildingsFileName);
+        HashMap<BuildingName, Building> initialBuildings = new HashMap<BuildingName, Building>();
 
-        return initialBuildQueue;
+        for (Building building : initialBuildQueue)
+        {
+            initialBuildings.put(building.buildingInternalName, building);
+        }
+
+        return initialBuildings;
     }
 
 

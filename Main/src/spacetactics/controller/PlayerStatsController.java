@@ -16,12 +16,11 @@ public class PlayerStatsController {
 
     private final String initialBuildingsFileName = "data/initialBuildings";
 
-    public PlanetaryResourceController planetaryResourceController;
-    public DataLoader dataLoader = new DataLoader();
+    public GameSimulation gameSimulation;
 
     public void annualUpdatePlayerStats(PlayerStats playerStats)
     {
-        planetaryResourceController.calculateProductionOnPlanets(playerStats);
+        gameSimulation.planetaryResourceController.calculateProductionOnPlanets(playerStats);
     }
 
     public void updateMasterBuildQueue()
@@ -29,8 +28,8 @@ public class PlayerStatsController {
 
     }
 
-    public PlayerStatsController ()
+    public PlayerStatsController(GameSimulation gameSimulation)
     {
-        this.planetaryResourceController = new PlanetaryResourceController();
+        this.gameSimulation = gameSimulation;
     }
 }

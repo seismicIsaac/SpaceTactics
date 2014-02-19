@@ -3,6 +3,7 @@ package spacetactics.controller;
 import spacetactics.SpaceTactics;
 import spacetactics.model.*;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -14,8 +15,26 @@ import java.util.HashMap;
  */
 public class GameSimulation {
 
-    private PlanetaryResourceController planetaryResourceController = new PlanetaryResourceController();
-    private PlayerStatsController playerStatsController = new PlayerStatsController();
+    public PlayerStatsController playerStatsController;
+    public PlanetaryResourceController planetaryResourceController;
+    public BuildingController buildingController;
+    public TechnologyController technologyController;
+    public DataLoader dataLoader;
+
+    public void nextTurn(Collection<PlayerStats> allPlayerStats)
+    {
+        for (PlayerStats playerStats : allPlayerStats)
+        {
+            planetaryResourceController.calculateProductionOnPlanets(playerStats);
+        }
+    }
+
+    public void settleColony(Planet planet, PlayerStats playerStats)
+    {
+        planetaryResourceController.initalizeNewColonyResources(planet, playerStats);
+        playerStats.settledPlanets.add(planet);
+        planet.settledBy = playerStats.playerSlot;
+    }
 
     public void initializeNewGame(GameData gameData, SpaceTactics spaceTactics)
     {
@@ -25,14 +44,11 @@ public class GameSimulation {
 
     }
 
-    public void nextTurn()
+    public GameSimulation()
     {
-
-    }
-
-    public void settleColony(Planet planet, PlayerStats playerStats)
-    {
-        planetaryResourceController.initalizeNewColonyResources(planet, playerStats);
-        planet.settledBy = playerStats.playerSlot;
+        playerStatsController = new PlayerStatsController(this);
+        planetaryResourceController = new PlanetaryResourceController(this);
+        buildingController = new BuildingController(this);
+        technologyController = new TechnologyController(this);
     }
 }

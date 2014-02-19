@@ -28,12 +28,10 @@ public class PlanetObserverScreen implements Screen {
     public ArrayList<PlanetView> planetViews = new ArrayList<PlanetView>();
     public ArrayList<Clickable> clickables = new ArrayList<Clickable>();
     public HashMap<String, Texture> textureAtlas = new HashMap<String, Texture>();
-    public PlayerStatsController playerStatsController = new PlayerStatsController();
-    public PlanetaryResourceController planetaryResourceController = new PlanetaryResourceController();
-    public NextTurnButton nextTurnButton = new NextTurnButton(1085, 25, 185, 61, "nextTurnButton.png", this);
-    public SettleColonyButton settleColonyButton = new SettleColonyButton(1085, 300, 185, 61, "settleColonyButton.png", this);
+    public NextTurnButton nextTurnButton;
+    public SettleColonyButton settleColonyButton;
     public PlanetView selectedPlanetView;
-    public String hudImageLocation = "hud1.png";
+    public final String hudImageLocation = "hud1.png";
 
     public void getPlanetViewTextures()
     {
@@ -58,6 +56,12 @@ public class PlanetObserverScreen implements Screen {
     public void displaySelectedPlanetStats()
     {
         String planetStats = new String("Max Population: " + selectedPlanetView.planet.maxPopulation + "  X:" + selectedPlanetView.planet.xPosition + "  Y:" + selectedPlanetView.planet.yPosition);
+        String planetIndustryBonus = new String("Industry Bonus: " + selectedPlanetView.planet.ProductionBonusByResourceType.get(PlanetaryResourceType.INDUSTRY));
+        String planetEcologyBonus = new String("Ecology Bonus: " + selectedPlanetView.planet.ProductionBonusByResourceType.get(PlanetaryResourceType.ECOLOGY));
+        String planetResearchBonus = new String("Research Bonus: " + selectedPlanetView.planet.ProductionBonusByResourceType.get(PlanetaryResourceType.SCIENCE));
+
+        int line1Y = 625;
+
 
         if(selectedPlanetView.planet.settledBy == PlayerSlot.PLAYER1)
         {
@@ -65,11 +69,15 @@ public class PlanetObserverScreen implements Screen {
             String currentlyBuilding = new String("Currently Building: " + selectedPlanetView.planet.planetaryResources.get(PlanetaryResourceType.INDUSTRY).currentlyBuilding.buildingName);
             String buildingProgress = new String("Progress: " + selectedPlanetView.planet.planetaryResources.get(PlanetaryResourceType.INDUSTRY).currentlyBuilding.progress);
 
-            spaceTactics.font.draw(spaceTactics.batch, planetStats2, 1000, 575);
-            spaceTactics.font.draw(spaceTactics.batch, currentlyBuilding, 1000, 550);
-            spaceTactics.font.draw(spaceTactics.batch, buildingProgress, 1000, 525);
+            spaceTactics.font.draw(spaceTactics.batch, planetStats2, 1000, line1Y - 25);
+            spaceTactics.font.draw(spaceTactics.batch, currentlyBuilding, 1000, line1Y - 50);
+            spaceTactics.font.draw(spaceTactics.batch, buildingProgress, 1000, line1Y - 75);
+
         }
-        spaceTactics.font.draw(spaceTactics.batch, planetStats, 1000, 600);
+        spaceTactics.font.draw(spaceTactics.batch, planetStats, 1000, line1Y);
+        spaceTactics.font.draw(spaceTactics.batch, planetIndustryBonus, 1000, line1Y-100);
+        spaceTactics.font.draw(spaceTactics.batch, planetEcologyBonus, 1000, line1Y-125);
+        spaceTactics.font.draw(spaceTactics.batch, planetResearchBonus, 1000, line1Y-150);
     }
 
     public void drawHud()
@@ -94,10 +102,11 @@ public class PlanetObserverScreen implements Screen {
             clickables.add(planetView);
         }
 
+        settleColonyButton = new SettleColonyButton(1085, 300, 185, 61, "settleColonyButton.png", spaceTactics);
+        nextTurnButton = new NextTurnButton(1085, 25, 185, 61, "nextTurnButton.png", spaceTactics);
         getPlanetViewTextures();
         clickables.add(nextTurnButton);
         clickables.add(settleColonyButton);
-        playerStatsController.planetaryResourceController = planetaryResourceController;
     }
 
     @Override

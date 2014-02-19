@@ -1,7 +1,12 @@
 package spacetactics.view.planetobserverscreen;
 
+import spacetactics.SpaceTactics;
+import spacetactics.controller.GameSimulation;
+import spacetactics.model.PlayerStats;
 import spacetactics.view.Button;
 import spacetactics.view.Clickable;
+
+import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,12 +17,13 @@ import spacetactics.view.Clickable;
  */
 public class NextTurnButton extends Button implements Clickable {
 
-    private PlanetObserverScreen planetObserverScreen;
+    private Collection<PlayerStats> allPlayerStats;
+    private GameSimulation gameSimulation;
 
     @Override
-    public void onClick() {
-        System.out.println("Next turn...");
-
+    public void onClick()
+    {
+        gameSimulation.nextTurn(allPlayerStats);
     }
 
     @Override
@@ -30,9 +36,10 @@ public class NextTurnButton extends Button implements Clickable {
         super.inView();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
-    public NextTurnButton(int x, int y, int width, int height, String imageLocation, PlanetObserverScreen planetObserverScreen)
+    public NextTurnButton(int x, int y, int width, int height, String imageLocation, SpaceTactics spaceTactics)
     {
         super(x, y, width, height, imageLocation);
-        this.planetObserverScreen = planetObserverScreen;
+        this.allPlayerStats = spaceTactics.gameData.players.values();
+        this.gameSimulation = spaceTactics.gameSimulation;
     }
 }

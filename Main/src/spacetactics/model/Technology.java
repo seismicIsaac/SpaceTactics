@@ -17,10 +17,15 @@ public class Technology {
     public String externalName;
     public ArrayList<ComplexPrerequisite> prerequisites;
     public ArrayList<TechnologyInternalName> requisiteFor;
+    public Availability availability;
+    public TechnologyReward researchReward;
     public int cost;
+    public int progress;
 
     public Technology()
     {
 
     }
+
+
 }

@@ -32,8 +32,9 @@ public class PlanetaryResource {
         this.baseUnitCount = playerStats.planetaryResourceStats.get(planetaryResourceType).baseUnitCount;
         this.baseUnitProductionMultiplier = playerStats.planetaryResourceStats.get(planetaryResourceType).baseUnitProductionMultiplier;
         this.baseUnitMax = planet.maxPopulation / playerStats.planetaryResourceStats.get(planetaryResourceType).baseUnitSize;
-        this.buildingQueue = playerStats.planetaryResourceStats.get(planetaryResourceType).buildingQueue;
-        this.currentlyBuilding = playerStats.planetaryResourceStats.get(planetaryResourceType).currentlyBuilding;
+        this.buildingQueue = initializeBuildingQueue(playerStats, planetaryResourceType);
+        this.innatePlanetBonus = planet.ProductionBonusByResourceType.get(planetaryResourceType);
+        this.planetarySpending = 1;
     }
 
     public PlanetaryResource(PlanetaryResourceType resourceType)
@@ -45,12 +46,26 @@ public class PlanetaryResource {
         this.baseUnitProductionMultiplier = 1;
         this.baseUnitSize = 10;
         this.buildingQueue = new ArrayList<Building>();
-
     }
 
     public PlanetaryResource()
     {
 
+    }
+
+    public ArrayList<Building> initializeBuildingQueue(PlayerStats playerStats, PlanetaryResourceType planetaryResourceType)
+    {
+        ArrayList<Building> buildingQueue = new ArrayList<Building>();
+
+        for (Building building : playerStats.masterBuildQueue.values())
+        {
+            if (building.associatedResource == planetaryResourceType && building.availability == Availability.BUILDABLE)
+            {
+                buildingQueue.add(building);
+            }
+        }
+
+        return buildingQueue;
     }
 
 }
