@@ -5,10 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import spacetactics.SpaceTactics;
-import spacetactics.controller.PlanetaryResourceController;
-import spacetactics.controller.PlayerStatsController;
 import spacetactics.model.*;
-import spacetactics.view.Button;
 import spacetactics.view.Clickable;
 
 import java.util.ArrayList;
@@ -37,20 +34,20 @@ public class PlanetObserverScreen implements Screen {
     {
         for (PlanetView planetView : planetViews)
         {
-            if (!textureAtlas.containsKey(planetView.imageLocation));
+            if (!textureAtlas.containsKey(planetView.textureLocation));
             {
-                Texture texture = new Texture(Gdx.files.internal(planetView.imageLocation));
-                textureAtlas.put(planetView.imageLocation, texture);
+                Texture texture = new Texture(Gdx.files.internal(planetView.textureLocation));
+                textureAtlas.put(planetView.textureLocation, texture);
             }
         }
         Texture texture = new Texture(Gdx.files.internal(hudImageLocation));
         textureAtlas.put(hudImageLocation, texture);
 
-        Texture texture1 = new Texture(Gdx.files.internal(nextTurnButton.imageLocation));
-        textureAtlas.put(nextTurnButton.imageLocation, texture1);
+        Texture texture1 = new Texture(Gdx.files.internal(nextTurnButton.textureLocation));
+        textureAtlas.put(nextTurnButton.textureLocation, texture1);
 
-        Texture texture2 = new Texture(Gdx.files.internal(settleColonyButton.imageLocation));
-        textureAtlas.put(settleColonyButton.imageLocation, texture2);
+        Texture texture2 = new Texture(Gdx.files.internal(settleColonyButton.textureLocation));
+        textureAtlas.put(settleColonyButton.textureLocation, texture2);
     }
 
     public void displaySelectedPlanetStats()
@@ -83,11 +80,11 @@ public class PlanetObserverScreen implements Screen {
     public void drawHud()
     {
         spaceTactics.batch.draw(this.textureAtlas.get(hudImageLocation),  0,  0);
-        spaceTactics.batch.draw(this.textureAtlas.get(nextTurnButton.imageLocation), nextTurnButton.xPosition, nextTurnButton.yPosition);
+        spaceTactics.batch.draw(this.textureAtlas.get(nextTurnButton.textureLocation), nextTurnButton.x, nextTurnButton.y);
 
         if(selectedPlanetView != null && selectedPlanetView.planet.settledBy != PlayerSlot.PLAYER1)
         {
-            spaceTactics.batch.draw(this.textureAtlas.get(settleColonyButton.imageLocation), settleColonyButton.xPosition, settleColonyButton.yPosition);
+            spaceTactics.batch.draw(this.textureAtlas.get(settleColonyButton.textureLocation), settleColonyButton.x, settleColonyButton.y);
         }
     }
 
@@ -119,7 +116,7 @@ public class PlanetObserverScreen implements Screen {
 
         for (PlanetView planetView : planetViews)
         {
-            spaceTactics.batch.draw(this.textureAtlas.get(planetView.imageLocation), planetView.planet.xPosition, planetView.planet.yPosition);
+            spaceTactics.batch.draw(this.textureAtlas.get(planetView.textureLocation), planetView.planet.xPosition, planetView.planet.yPosition);
         }
 
         drawHud();

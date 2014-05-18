@@ -38,10 +38,8 @@ public class GameSimulation {
 
     public void initializeNewGame(GameData gameData, SpaceTactics spaceTactics)
     {
-
         gameData.localUniverse = new LocalUniverse(spaceTactics.APPLICATION_WIDTH, spaceTactics.APPLICATION_HEIGHT, spaceTactics);
-        gameData.players.put(PlayerSlot.PLAYER1, new PlayerStats(PlayerSlot.PLAYER1));
-
+        playerStatsController.initializePlayerStats(PlayerSlot.PLAYER1, gameData.players);
     }
 
     public GameSimulation()

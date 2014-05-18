@@ -65,4 +65,9 @@ public class TechnologyController {
     {
         this.gameSimulation = gameSimulation;
     }
+
+    public void pickSomethingToResearch(PlayerStats playerStats, Technology technology)
+    {
+        playerStats.currentlyResearching = technology;
+    }
 }

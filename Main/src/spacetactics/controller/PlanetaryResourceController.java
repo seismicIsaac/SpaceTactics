@@ -17,8 +17,6 @@ public class PlanetaryResourceController {
 
     public GameSimulation gameSimulation;
 
-    private Json json = new Json();
-
     public void calculateProductionOnPlanets(PlayerStats playerStats)
     {
         for (Planet planet : playerStats.settledPlanets)
@@ -66,11 +64,6 @@ public class PlanetaryResourceController {
         }
     }
 
-    public void processResearchPoints(PlayerStats playerStats, int researchPoints)
-    {
-
-    }
-
     public float getResourceProduction(PlanetaryResource planetaryResource)
     {
         System.out.println("Production: " + planetaryResource.baseUnitCount * planetaryResource.baseUnitProductionMultiplier * planetaryResource.innatePlanetBonus * planetaryResource.planetarySpending);
@@ -102,11 +95,6 @@ public class PlanetaryResourceController {
         }
 
         return statModification;
-    }
-
-    public void updateBuildQueue(PlanetaryResource planetaryResource, ArrayList<Technology> playerTechnologies)
-    {
-
     }
 
     public void initalizeNewColonyResources(Planet planet, PlayerStats playerStats)

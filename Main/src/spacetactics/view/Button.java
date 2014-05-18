@@ -8,14 +8,7 @@ package spacetactics.view;
  * To change this template use File | Settings | File Templates.
  */
 
-public class Button implements Clickable {
-
-    public int xPosition;
-    public int yPosition;
-    public final int buttonWidth;
-    public final int buttonHeight;
-
-    public final String imageLocation;
+public class Button extends UIElement implements Clickable {
 
     public void onClick()
     {
@@ -29,7 +22,7 @@ public class Button implements Clickable {
 
     public boolean hitTest(int x, int y)
     {
-        return (x >= this.xPosition && x <= this.xPosition + this.buttonWidth ) && (y >= this.yPosition && y <= this.yPosition + this.buttonHeight);
+        return (x >= this.x && x <= this.x + this.width) && (y >= this.y && y <= this.y + this.height);
     }
 
     @Override
@@ -39,11 +32,11 @@ public class Button implements Clickable {
 
     public Button(int x, int y, int width, int height, String imageLocation)
     {
-        this.xPosition = x;
-        this.yPosition = y;
-        this.buttonWidth = width;
-        this.buttonHeight = height;
-        this.imageLocation = imageLocation;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.textureLocation = imageLocation;
     }
 
 
